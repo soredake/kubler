@@ -4,7 +4,6 @@
 set -e
 
 EMERGE_ROOT="/emerge-root"
-EMERGE_BIN="${BOB_EMERGE_BIN:-emerge}"
 EMERGE_OPT="${EMERGE_OPT:-}"
 CONFIG="/config"
 CONFIG_TMP="${CONFIG}/tmp"

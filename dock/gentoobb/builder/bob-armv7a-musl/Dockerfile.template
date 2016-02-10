@@ -1,0 +1,7 @@
+#BUILD_FROM gentoobb/bob
+FROM ${NAMESPACE}/bob-armv7a-musl
+MAINTAINER ${MAINTAINER}
+
+#ADD qemu-arm /qemu-arm
+
+CMD ["/bin/bash"]

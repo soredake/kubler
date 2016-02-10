@@ -23,9 +23,9 @@ configure_bob() {
 configure_rootfs_build()
 {
     # as we broke the normal builder chain, recreate the docs for the busybox image
-    init_docs 'gentoobb/busybox'
-    update_use 'sys-apps/busybox' '+static +make-symlinks'
-    generate_doc_package_installed 'sys-apps/busybox'
+    #init_docs 'gentoobb/busybox'
+    #update_use 'sys-apps/busybox' '+static +make-symlinks'
+    #generate_doc_package_installed 'sys-apps/busybox'
     # fake portage install
     provide_package sys-apps/portage
     # set locales
@@ -50,9 +50,9 @@ finish_rootfs_build()
     find $EMERGE_ROOT/usr/share/i18n/locales -type f "${locales_filter[@]}" -exec rm -f {} \;
     find $EMERGE_ROOT/usr/share/i18n/charmaps -type f "${charmaps_filter[@]}" -exec rm -f {} \;
     # backup iconv encodings so other images can pull them in again via ICONV_FROM=glibc
-    tar -cpf $ROOTFS_BACKUP/glibc-ICONV.tar $EMERGE_ROOT/usr/lib64/gconv/
+    tar -cpf $ROOTFS_BACKUP/glibc-ICONV.tar $EMERGE_ROOT/usr/lib${BOB_BITS}/gconv/
     # purge iconv
-    rm -f $EMERGE_ROOT/usr/lib64/gconv/*
+    rm -f $EMERGE_ROOT/usr/lib${BOB_BITS}/gconv/*
     # add entry to purged section in PACKAGES.md
     write_checkbox_line "Glibc Iconv Encodings" "checked" "${DOC_FOOTER_PURGED}"
 }
