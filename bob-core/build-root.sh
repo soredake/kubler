@@ -24,12 +24,12 @@ IMAGE_NS="${REPO%%/*}"
 IMAGE_ID="${REPO##*/}"
 
 copy_gcc_libs() {
-    mkdir -p ${EMERGE_ROOT}/lib64
+    mkdir -p ${EMERGE_ROOT}/lib${BOB_BITS}
     LIBGCC="$(find /usr/lib/ -name libgcc_s.so.1)"
     LIBSTDC="$(find /usr/lib/ -name libstdc++.so.6)"
 
     for lib in ${LIBGCC} ${LIBSTDC}; do
-        cp $lib ${EMERGE_ROOT}/lib64/
+        cp $lib ${EMERGE_ROOT}/lib${BOB_BITS}/
     done
 }
 
@@ -113,19 +113,19 @@ write_checkbox_line() {
     NEGATE_CHECK_STATE="${4}"
     if [[ -z "$CHECKED" ]] || [[ "$CHECKED" = "false" ]]; then
         STATE=0
-    else 
+    else
         STATE=1
     fi
     if [[ -n $NEGATE_CHECK_STATE ]]; then
         if [[ "$STATE" == 1 ]]; then
             STATE=0
-        else 
+        else
             STATE=1
         fi
     fi
     if [[ "$STATE" == 1 ]]; then
         CHECKBOX="- [x]"
-    else 
+    else
         CHECKBOX="- [ ]"
     fi
     echo "${CHECKBOX} ${LABEL}" >> "${3}"
@@ -296,7 +296,7 @@ declare -F configure_bob &>/dev/null && configure_bob
 unset USE_BUILDER_FLAGS
 source /etc/profile
 
-mkdir -p ${ROOTFS_BACKUP} 
+mkdir -p ${ROOTFS_BACKUP}
 
 # set ROOT env for emerge calls
 export ROOT="${EMERGE_ROOT}"
@@ -320,12 +320,12 @@ if [ -n "$PACKAGES" ]; then
     [[ -f ${PACKAGE_INSTALLED} ]] && cat ${PACKAGE_INSTALLED} | sed -e /^virtual/d >> /etc/portage/profile/package.provided
 
     # backup headers and static files, depending images can pull them in again
-    if [ -d $EMERGE_ROOT/usr/include ]; then 
+    if [ -d $EMERGE_ROOT/usr/include ]; then
         find $EMERGE_ROOT/usr/include -type f -name '*.h' | \
             tar -cpf ${ROOTFS_BACKUP}/${IMAGE_NS}_${IMAGE_ID}-HEADERS.tar --files-from -
     fi
-    if [ -d $EMERGE_ROOT/usr/lib64 ]; then
-        find $EMERGE_ROOT/usr/lib64 -type f -name '*.a' | \
+    if [ -d $EMERGE_ROOT/usr/lib${BOB_BITS} ]; then
+        find $EMERGE_ROOT/usr/lib${BOB_BITS} -type f -name '*.a' | \
             tar -cpf ${ROOTFS_BACKUP}/${IMAGE_NS}_${IMAGE_ID}-STATIC_LIBS.tar --files-from -
     fi
 
@@ -357,11 +357,11 @@ rm -rf $EMERGE_ROOT/usr/share/gtk-doc/* $EMERGE_ROOT/var/db/pkg/* $EMERGE_ROOT/e
 if [ -z "$KEEP_HEADERS" ]; then
     rm -rf $EMERGE_ROOT/usr/include/*
 fi
-if [ -z "$KEEP_STATIC_LIBS" ] && [ -d $EMERGE_ROOT/lib64 ] && [ "$(ls -A $EMERGE_ROOT/lib64)" ]; then
-    find $EMERGE_ROOT/lib64/* -type f -name "*.a" -exec rm -f {} \;
+if [ -z "$KEEP_STATIC_LIBS" ] && [ -d $EMERGE_ROOT/lib${BOB_BITS} ] && [ "$(ls -A $EMERGE_ROOT/lib${BOB_BITS})" ]; then
+    find $EMERGE_ROOT/lib${BOB_BITS}/* -type f -name "*.a" -exec rm -f {} \;
 fi
-if [ -z "$KEEP_STATIC_LIBS" ] && [ -d $EMERGE_ROOT/usr/lib64 ] && [ "$(ls -A $EMERGE_ROOT/usr/lib64)" ]; then
-    find $EMERGE_ROOT/usr/lib64/* -type f -name "*.a" -exec rm -f {} \;
+if [ -z "$KEEP_STATIC_LIBS" ] && [ -d $EMERGE_ROOT/usr/lib${BOB_BITS} ] && [ "$(ls -A $EMERGE_ROOT/usr/lib${BOB_BITS})" ]; then
+    find $EMERGE_ROOT/usr/lib${BOB_BITS}/* -type f -name "*.a" -exec rm -f {} \;
 fi
 
 if [ -n "$INSTALL_DOCKER_GEN" ]; then

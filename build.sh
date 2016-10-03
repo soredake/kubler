@@ -163,6 +163,9 @@ check_builder_dependencies() {
 
 build()
 {
+    if [ -z "$HCHOST" ] && [ -z "$TCHOST" ]; then
+        die "error: you need to supply -H and -t options to build image."
+    fi
     if ($BUILD_WITHOUT_DEPS && [ "${1}" == "*" ]); then
         die "error: -n does not support wildcards, specify one or more repo names."
     fi
@@ -239,7 +242,7 @@ missing()
 
 has_required_binaries
 
-while getopts ":fFcCnsh" opt; do
+while getopts ":fFcCnshHt" opt; do
   case $opt in
     f)
       FORCE_REBUILD=true
@@ -259,6 +262,12 @@ while getopts ":fFcCnsh" opt; do
     s)
       SKIP_GPG=true
       ;;
+    H)
+      HCHOST=${OPTARGS}
+      ;;
+    t)
+      TCHOST=${OPTARGS}
+      ;;
     h)
       ACTION="help"
   esac
@@ -275,13 +284,15 @@ case "${ACTION}" in
     build) build "$REPOS";;
     update) update_stage3_date;;
     missing) missing "$REPOS";;
-    help) msg "usage: ${0} [-n, -f, -F, -c, -C, -h] {build|update|missing} [repo ...]
+    help) msg "usage: ${0} [-n, -f, -F, -c, -C, -h, -H HostCHOST, -t TargetCHOST] {build|update|missing} [repo ...]
     -f force repo rebuild
     -F also rebuild repo rootfs tar ball
     -c rebuild building containers
     -C also rebuild stage3 import containers
     -n do not build repo dependencies for given repo(s)
     -s skip gpg validation on downloaded files
+    -H select host architecture stage3 (required for build)
+    -t select target architecture (required for build)
     -h help" ;;
 *) die "invalid action '${ACTION}'" ;;
 esac
