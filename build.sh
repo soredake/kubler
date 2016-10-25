@@ -211,9 +211,56 @@ build()
     done
 }
 
+translate_arch() {
+  case ${1} in
+    armv7a-hardfloat-linux-musl) ARCH=arm ;;
+    armv7a-hardfloat-linux-gnueabi) ARCH=arm ;;
+    x86_64-pc-linux-musl) ARCH=amd64 ;;
+    x86_64-pc-linux-uclibc) ARCH=amd64 ;;
+    n) BUILD_WITHOUT_DEPS=true
+  esac
+}
+
+stage3base() {
+  case ${1} in
+    armv7a-hardfloat-linux-musl) STAGE3_BASE=stage3-armv7a_hardfp-musl-hardened ;;
+    armv7a-hardfloat-linux-gnueabi) STAGE3_BASE=stage3-armv7a_hardfp ;;
+    x86_64-pc-linux-musl) STAGE3_BASE=stage3-amd64-musl-hardened ;;
+    x86_64-pc-linux-uclibc) STAGE3_BASE=stage3-amd64-uclibc-hardened ;;
+    n) BUILD_WITHOUT_DEPS=true
+  esac
+}
+
+create_url() {
+  stage3base ${1}
+  case ${1} in
+    armv7a-hardfloat-linux-musl) EXP=experimental ;;
+    armv7a-hardfloat-linux-gnueabi) EXP=releases ;;
+    x86_64-pc-linux-musl) EXP=experimental ;;
+    x86_64-pc-linux-uclibc) EXP=experimental
+  esac
+  case ${1} in
+    *musl) LIBC=experimental ;;
+    *gnueabi) LIBC= ;;
+    *uclibc) LIBC=uclibc
+  esac
+  FLIBC=${LIBC}/
+
+  if [[ "${1}" == "armv7a*-musl" ]]; then
+    S3DATE_REMOTE="$(curl -s ${MIRROR}/${EXP}/${ARCH}/${FLIBC}autobuilds/latest-stage3.txt | grep ${STAGE3_BASE} | awk -F '/' '{print $1}')"
+    #http://mirrors.xservers.ro/gentoo/experimental/arm/musl/stage3-armv7a_hardfp-musl-hardened-20160606.tar.bz2
+  elif [[ "${1}" == "armv7a*-gnueabi" ]]; then
+    S3DATE_REMOTE="$(curl -s ${MIRROR}/${EXP}/${ARCH}/${FLIBC}autobuilds/latest-stage3.txt | grep ${STAGE3_BASE} | awk -F '/' '{print $1}')"
+    #http://mirrors.xservers.ro/gentoo/experimental/arm/hardened/stage3-armv7a_hardfp-hardened-20160613.tar.bz2
+  elif [[ "${1}" == "x86_64*-musl" ]]; then
+    S3DATE_REMOTE="$(curl -s ${MIRROR}/${EXP}/${ARCH}/${FLIBC}autobuilds/latest-stage3.txt | grep ${STAGE3_BASE} | awk -F '/' '{print $1}')"
+  fi
+}
+
 # Update DATE to latest stage3 build date
 update_stage3_date() {
-    S3DATE_REMOTE="$(curl -s ${MIRROR}/releases/amd64/autobuilds/latest-stage3.txt | grep ${STAGE3_BASE} | awk -F '/' '{print $1}')"
+    translate_arch ${HCHOST}
+    create_url ${HCHOST}
     regex='^DATE=("?([0-9]+)"?)|("\$\{DATE:-([0-9]+)\}")'
     if [[ "$(grep ^DATE= build.conf)" =~ $regex ]]; then
         S3DATE_LOCAL="${BASH_REMATCH[4]}"
@@ -242,34 +289,17 @@ missing()
 
 has_required_binaries
 
-while getopts ":fFcCnshHt" opt; do
+while getopts ":fFcCnsh:H:t:" opt; do
   case $opt in
-    f)
-      FORCE_REBUILD=true
-      ;;
-    F)
-      FORCE_ROOTFS_REBUILD=true
-      ;;
-    c)
-      FORCE_BUILDER_REBUILD=true
-      ;;
-    C)
-      FORCE_FULL_REBUILD=true
-      ;;
-    n)
-      BUILD_WITHOUT_DEPS=true
-      ;;
-    s)
-      SKIP_GPG=true
-      ;;
-    H)
-      HCHOST=${OPTARGS}
-      ;;
-    t)
-      TCHOST=${OPTARGS}
-      ;;
-    h)
-      ACTION="help"
+    f) FORCE_REBUILD=true ;;
+    F) FORCE_ROOTFS_REBUILD=true ;;
+    c) FORCE_BUILDER_REBUILD=true ;;
+    C) FORCE_FULL_REBUILD=true ;;
+    n) BUILD_WITHOUT_DEPS=true ;;
+    s) SKIP_GPG=true ;;
+    H) HCHOST=${OPTARGS} ;;
+    t) TCHOST=${OPTARGS} ;;
+    h) ACTION="help"
   esac
 done
 shift $(( $OPTIND -1 ))
