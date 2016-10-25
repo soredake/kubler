@@ -297,8 +297,8 @@ while getopts ":fFcCnsh:H:t:" opt; do
     C) FORCE_FULL_REBUILD=true ;;
     n) BUILD_WITHOUT_DEPS=true ;;
     s) SKIP_GPG=true ;;
-    H) HCHOST=${OPTARGS} ;;
-    t) TCHOST=${OPTARGS} ;;
+    H) HCHOST=${OPTARG} ;;
+    t) TCHOST=${OPTARG} ;;
     h) ACTION="help"
   esac
 done
