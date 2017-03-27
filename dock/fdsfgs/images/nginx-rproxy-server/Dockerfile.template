@@ -1,0 +1,8 @@
+FROM ${IMAGE_PARENT}
+MAINTAINER ${MAINTAINER}
+
+RUN rm /etc/nginx/sites-enabled/*
+
+ADD etc /etc
+
+CMD ["/bin/s6-svscan", "/etc/service/"]

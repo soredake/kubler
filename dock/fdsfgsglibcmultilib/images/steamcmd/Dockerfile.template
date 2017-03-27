@@ -1,0 +1,8 @@
+FROM ${IMAGE_PARENT}
+MAINTAINER ${MAINTAINER}
+
+ADD rootfs.tar /
+
+#RUN mkdir -p /home/steam/Steam && \
+#    adduser -D -s /bin/sh steam && \
+#    chown -R steam:steam /home/steam

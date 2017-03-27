@@ -1,0 +1,30 @@
+#!/bin/bash
+
+if [ ! -d /data/git/.ssh ]; then
+    mkdir -p /data/git/.ssh
+    chmod 700 /data/git/.ssh
+fi
+
+if [ ! -f /data/git/.ssh/environment ]; then
+    echo "GITEA_CUSTOM=/data/gitea" >| /data/git/.ssh/environment
+    chmod 600 /data/git/.ssh/environment
+fi
+
+if [ ! -f /data/gitea/conf/app.ini ]; then
+    mkdir -p /data/gitea/conf
+    cp /etc/templates/app.ini /data/gitea/conf/app.ini
+fi
+
+chown -R git:git /data/gitea /app/gitea /data/git
+chmod 0755 /data/gitea /app/gitea /data/git
+
+GITEA_PREFIX=${EPREFIX}/var/lib/gitea
+sed -i -e "s#^RUN_MODE =*^#RUN_MODE = prod#"\
+  -e "s#^DISABLE_HTTP_GIT =*^#DISABLE_HTTP_GIT = true#"\
+  -e "s#^PREFERRED_LICENSES =*^#PREFERRED_LICENSES = GNU General Public License v3.0#"\
+  -e "s#^OFFLINE_MODE =*^#OFFLINE_MODE = true#"\
+  -e "s#^ENABLE_GZIP =*^#ENABLE_GZIP = true#"\
+  -e "s#^DB_TYPE =*^#DB_TYPE = sqlite3#"\
+  -e "s#^DISABLE_REGISTRATION =*^#DISABLE_REGISTRATION = true#"\
+  -e "s#^SECRET_KEY =*^#SECRET_KEY = ${SECRET_KEY}#"\
+  -e "s#^COOKIE_SECURE =*^#COOKIE_SECURE = true#" src/${EGO_PN%/*}/conf/app.ini

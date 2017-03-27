@@ -1,0 +1,11 @@
+# start the build container in privileged mode, required for glibc. use ## to comment out
+#BUILD_PRIVILEGED
+# use default build container instead of bob-musl-busybox
+FROM ${IMAGE_PARENT}
+MAINTAINER ${MAINTAINER}
+
+#ENV LANG en_US.utf8
+
+ADD rootfs.tar /
+#ADD qemu-arm-static /usr/bin/qemu-arm-static
+#RUN ldconfig

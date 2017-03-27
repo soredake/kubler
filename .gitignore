@@ -7,3 +7,6 @@ dock/*/builder/PACKAGES.md
 dock/*
 !dock/kubler
 !dock/dummy
+!dock/fdsfgs
+!dock/fdsfgsglibc
+!dock/fdsfgsglibcmultilib

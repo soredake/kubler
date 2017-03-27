@@ -1,0 +1,8 @@
+FROM ${IMAGE_PARENT}
+MAINTAINER ${MAINTAINER}
+
+ADD rootfs.tar /
+
+#RUN useradd -H -h /var/empty -s /bin/false -p 123 ssh
+
+CMD ["/bin/sh"]

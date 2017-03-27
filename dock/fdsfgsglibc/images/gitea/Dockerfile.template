@@ -1,0 +1,19 @@
+FROM ${IMAGE_PARENT}
+MAINTAINER ${MAINTAINER}
+
+ADD rootfs.tar /
+
+ENV GOGS_CUSTOM /data/gitea
+WORKDIR /app/gitea
+ENV USER git
+
+COPY etc /etc
+COPY files/entrypoint /usr/bin
+
+ENV GODEBUG=netdns=go
+
+# Configure Docker Container
+VOLUME ["/data"]
+EXPOSE 22 3000
+ENTRYPOINT ["/usr/bin/entrypoint"]
+CMD ["/bin/s6-svscan", "/etc/service/"]

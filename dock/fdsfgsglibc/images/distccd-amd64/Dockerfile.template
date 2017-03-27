@@ -1,0 +1,6 @@
+FROM ${IMAGE_PARENT}
+MAINTAINER ${MAINTAINER}
+
+ADD rootfs.tar /
+
+CMD ["/usr/bin/distccd","--allow 0.0.0.0/0","--user distcc","--log-level notice" "--log-stderr","--no-detach"]

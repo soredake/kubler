@@ -1,0 +1,17 @@
+#!/bin/sh
+
+set -x
+# wait for start
+sleep 5
+echo "php-fpm: waiting for nginx to start.."
+until pgrep 'nginx' >/dev/null 2>&1; do
+  sleep 1
+done
+
+MEM=${PHP_MEM:=256M}
+
+sed -i 's/memory_limit.*$/memory_limit = '$MEM'/g' /etc/php/fpm-php5.6/php.ini
+sed -i -e 's/nobody/www-data/g' -e 's|127.0.0.1:9000|/run/php5-fpm.sock|g' /etc/php/fpm-php5.6/php-fpm.conf
+
+#exec 2>&1
+exec /usr/bin/php-fpm5.6 --nodaemonize -c /etc/php/fpm-php5.6 -y /etc/php/fpm-php5.6/php-fpm.conf 2>&1
