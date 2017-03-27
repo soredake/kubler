@@ -2,7 +2,7 @@
 # build config
 #
 PACKAGES="sys-libs/musl"
-TIMEZONE="${BOB_TIMEZONE:-UTC}"
+#TIMEZONE="${BOB_TIMEZONE:-UTC}"
 #EMERGE_BIN="emerge"
 
 configure_bob() {
@@ -14,7 +14,8 @@ configure_bob() {
 #
 configure_rootfs_build()
 {
-    cp /etc/timezone $EMERGE_ROOT/etc/
+    #cp /etc/timezone $EMERGE_ROOT/etc/
+	    :
 }
 
 #
