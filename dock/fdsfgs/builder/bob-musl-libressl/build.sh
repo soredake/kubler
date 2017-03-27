@@ -25,6 +25,8 @@ configure_bob() {
     echo "-libressl" >> /etc/portage/profile/use.stable.mask
     echo "-curl_ssl_libressl" >> /etc/portage/profile/use.stable.mask
     mask_package dev-libs/openssl
+    mask_package dev-python/cryptography::gentoo
+    sync_overlay libressl https://github.com/gentoo/libressl.git
     echo "dev-libs/libressl **" >> /etc/portage/package.accept_keywords/flaggie
     emerge -f libressl
     rm /usr/lib/misc/ssh-keysign
