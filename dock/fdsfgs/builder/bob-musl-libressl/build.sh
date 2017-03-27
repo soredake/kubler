@@ -25,8 +25,7 @@ configure_bob() {
     echo "-libressl" >> /etc/portage/profile/use.stable.mask
     echo "-curl_ssl_libressl" >> /etc/portage/profile/use.stable.mask
     mask_package dev-libs/openssl
-    echo "dev-python/cryptography::gentoo" >> /etc/portage/package.mask/bob
-    sync_overlay libressl https://github.com/gentoo/libressl.git
+    
     echo "dev-libs/libressl **" >> /etc/portage/package.accept_keywords/flaggie
     emerge -f libressl
     rm /usr/lib/misc/ssh-keysign
@@ -36,13 +35,10 @@ configure_bob() {
     # install default packages
     update_use 'dev-vcs/git' '-perl'
     update_use 'app-crypt/pinentry' '+ncurses'
-    update_keywords 'app-portage/layman' '+~amd64'
-    update_keywords 'dev-python/ssl-fetch' '+~amd64'
     update_use 'net-misc/curl' '+curl_ssl_libressl' '-curl_ssl_openssl'
-    emerge net-misc/curl dev-vcs/git app-portage/layman sys-devel/distcc app-misc/jq
+    emerge net-misc/curl dev-vcs/git sys-devel/distcc app-misc/jq
     install_git_postsync_hooks
-    configure_layman
-    # add musl overlay, it may exist already in the shared portage container
-    layman -l | grep -q musl && layman -d musl
-    layman -a musl
+    # add musl and libressl overlay
+    sync_overlay libressl https://github.com/gentoo/libressl.git
+    sync_overlay musl https://github.com/gentoo/musl.git
 }
