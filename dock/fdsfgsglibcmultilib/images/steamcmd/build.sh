@@ -39,11 +39,11 @@ finish_rootfs_build()
     useradd -s /bin/sh steam
     mkdir -p ${_EMERGE_ROOT}/home/steam/Steam
     chown -R steam:steam ${_EMERGE_ROOT}/home/steam
-    copy_gcc_libs
-    mkdir -p ${EMERGE_ROOT}/lib32
-    LIBGCC="$(find /usr/lib/gcc/*/*/32 -name libgcc_s.so.1)"
-    LIBSTDC="$(find /usr/lib/gcc/*/*/32 -name libstdc++.so.6)"
-    for lib in ${LIBGCC} ${LIBSTDC}; do
-        cp $lib ${EMERGE_ROOT}/lib32
-    done
+    #copy_gcc_libs
+    #mkdir -p ${EMERGE_ROOT}/lib32
+    #LIBGCC="$(find /usr/lib/gcc/*/*/32 -name libgcc_s.so.1)"
+    #LIBSTDC="$(find /usr/lib/gcc/*/*/32 -name libstdc++.so.6)"
+    #for lib in ${LIBGCC} ${LIBSTDC}; do
+    #    cp $lib ${EMERGE_ROOT}/lib32
+    #done
 }
