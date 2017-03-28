@@ -1,7 +1,8 @@
-### fdsfgsglibc/glibc:20170226
-Built: Sun Mar 26 14:24:59 UTC 2017
+### fdsfgsglibc/glibc:20170326
 
-Image Size: 11.63 MB
+Built: Tue Mar 28 18:29:48 UTC 2017
+Image Size: 11.22 MB
+
 #### Installed
 Package | USE Flags
 --------|----------
@@ -11,7 +12,7 @@ sys-libs/timezone-data-2017a | `nls -leaps`
 #### Inherited
 Package | USE Flags
 --------|----------
-**FROM gentoobb/busybox** |
+**FROM ${NAMESPACE}/busybox** |
 **FROM fdsfgsglibc/busybox** |
 sys-apps/busybox-1.25.1 | `ipv6 make-symlinks static -debug -livecd -math -mdev -pam -savedconfig (-selinux) -sep-usr -syslog -systemd`
 #### Purged

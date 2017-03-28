@@ -1,7 +1,8 @@
-### fdsfgsglibc/libressl:20170226
-Built: Sun Mar 26 14:32:37 UTC 2017
+### fdsfgsglibc/libressl:20170326
 
-Image Size: 16.64 MB
+Built: Tue Mar 28 18:31:52 UTC 2017
+Image Size: 16.21 MB
+
 #### Installed
 Package | USE Flags
 --------|----------
@@ -13,15 +14,15 @@ sys-apps/debianutils-4.7 | `-static`
 Package | USE Flags
 --------|----------
 **FROM fdsfgsglibc/s6** |
-dev-lang/execline-2.2.0.0 | `-static -static-libs`
-dev-libs/skalibs-2.4.0.2 | `ipv6 -doc -static-libs`
-sys-apps/s6-2.4.0.0 | `-static -static-libs`
-*manual install*: entr-3.6 | http://entrproject.org/
+app-admin/entr-3.6 | `{-test}`
+dev-lang/execline-2.1.1.0 | `-static -static-libs`
+dev-libs/skalibs-2.3.2.0 | `ipv6 -doc -static-libs`
+sys-apps/s6-2.1.3.0 | `-static`
 **FROM fdsfgsglibc/glibc** |
 sys-apps/gentoo-functions-0.10 | ``
 sys-libs/glibc-2.23-r3 | `hardened rpc -audit -caps -debug -gd (-multilib) -nscd (-profile) (-selinux) -suid -systemtap -vanilla`
 sys-libs/timezone-data-2017a | `nls -leaps`
-**FROM gentoobb/busybox** |
+**FROM ${NAMESPACE}/busybox** |
 **FROM fdsfgsglibc/busybox** |
 sys-apps/busybox-1.25.1 | `ipv6 make-symlinks static -debug -livecd -math -mdev -pam -savedconfig (-selinux) -sep-usr -syslog -systemd`
 #### Purged

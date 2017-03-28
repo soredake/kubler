@@ -1,7 +1,8 @@
-### fdsfgsglibcmultilib/libressl:20170226
-Built: Sun Mar 26 15:33:27 UTC 2017
+### fdsfgsglibcmultilib/libressl:20170326
 
-Image Size: 31.85 MB
+Built: Tue Mar 28 19:37:20 UTC 2017
+Image Size: 31.46 MB
+
 #### Installed
 Package | USE Flags
 --------|----------
@@ -13,6 +14,7 @@ sys-apps/debianutils-4.7 | `-static`
 Package | USE Flags
 --------|----------
 **FROM fdsfgsglibcmultilib/s6** |
+app-admin/entr-3.6 | `{-test}`
 dev-lang/execline-2.1.1.0 | `-static -static-libs`
 dev-libs/skalibs-2.3.2.0 | `ipv6 -doc -static-libs`
 sys-apps/s6-2.1.3.0 | `-static`
@@ -20,7 +22,7 @@ sys-apps/s6-2.1.3.0 | `-static`
 sys-apps/gentoo-functions-0.10 | ``
 sys-libs/glibc-2.23-r3 | `hardened (multilib) rpc -audit -caps -debug -gd -nscd (-profile) (-selinux) -suid -systemtap -vanilla`
 sys-libs/timezone-data-2017a | `nls -leaps`
-**FROM gentoobb/busybox** |
+**FROM ${NAMESPACE}/busybox** |
 **FROM fdsfgsglibcmultilib/busybox** |
 sys-apps/busybox-1.25.1 | `ipv6 make-symlinks static -debug -livecd -math -mdev -pam -savedconfig (-selinux) -sep-usr -syslog -systemd`
 #### Purged

@@ -1,7 +1,8 @@
-### fdsfgsglibcmultilib/bash:20170226
-Built: Sun Mar 26 15:37:36 UTC 2017
+### fdsfgsglibcmultilib/bash:20170326
 
-Image Size: 48.31 MB
+Built: Tue Mar 28 19:40:01 UTC 2017
+Image Size: 47.92 MB
+
 #### Installed
 Package | USE Flags
 --------|----------
@@ -27,6 +28,7 @@ app-misc/c_rehash-1.7-r1 | ``
 dev-libs/libressl-2.5.1 | `asm -static-libs`
 sys-apps/debianutils-4.7 | `-static`
 **FROM fdsfgsglibcmultilib/s6** |
+app-admin/entr-3.6 | `{-test}`
 dev-lang/execline-2.1.1.0 | `-static -static-libs`
 dev-libs/skalibs-2.3.2.0 | `ipv6 -doc -static-libs`
 sys-apps/s6-2.1.3.0 | `-static`
@@ -34,7 +36,7 @@ sys-apps/s6-2.1.3.0 | `-static`
 sys-apps/gentoo-functions-0.10 | ``
 sys-libs/glibc-2.23-r3 | `hardened (multilib) rpc -audit -caps -debug -gd -nscd (-profile) (-selinux) -suid -systemtap -vanilla`
 sys-libs/timezone-data-2017a | `nls -leaps`
-**FROM gentoobb/busybox** |
+**FROM ${NAMESPACE}/busybox** |
 **FROM fdsfgsglibcmultilib/busybox** |
 sys-apps/busybox-1.25.1 | `ipv6 make-symlinks static -debug -livecd -math -mdev -pam -savedconfig (-selinux) -sep-usr -syslog -systemd`
 #### Purged
