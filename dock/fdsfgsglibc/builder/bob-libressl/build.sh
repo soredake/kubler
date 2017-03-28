@@ -41,8 +41,8 @@ configure_bob() {
     emerge net-misc/curl dev-vcs/git app-portage/layman sys-devel/distcc app-misc/jq
     install_git_postsync_hooks
     # install aci/oci requirements
-    emerge dev-lang/go
-    install_oci_deps
+    #emerge dev-lang/go
+    #install_oci_deps
     # add libressl overlay
     sync_overlay libressl https://github.com/gentoo/libressl.git
 }
