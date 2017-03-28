@@ -1,7 +1,7 @@
 #
 # build config
 #
-PACKAGES="app-shells/bash dev-db/postgresql"
+_packages="app-shells/bash dev-db/postgresql"
 
 #
 # this method runs in the bb builder container just before starting the build of the rootfs

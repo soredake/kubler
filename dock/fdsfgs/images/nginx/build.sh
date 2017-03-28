@@ -13,7 +13,7 @@ configure_rootfs_build()
     echo 'NGINX_MODULES_MAIL=""' >> /etc/portage/make.conf
     update_use 'www-servers/nginx' '+http2' '+libressl' '+luajit' '+pcre-jit'
     update_use 'dev-libs/libpcre' '-readline'
-    update_use '+libressl'
+    update_use '+libressl' '+jit'
     update_use 'net-misc/iputils' '+libressl'
 }
 

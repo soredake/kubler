@@ -1,7 +1,7 @@
 #
 # build config
 #
-PACKAGES="dev-java/icedtea-bin"
+_packages="dev-java/icedtea-bin"
 
 #
 # this method runs in the bb builder container just before starting the build of the rootfs

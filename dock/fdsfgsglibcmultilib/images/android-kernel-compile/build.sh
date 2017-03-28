@@ -1,6 +1,6 @@
 # build config
 #
-PACKAGES="dev-vcs/git app-crypt/gnupg net-misc/curl sys-devel/bc app-arch/lzop app-arch/zip app-arch/unzip dev-libs/libxml2 dev-util/ccache sys-devel/flex x11-proto/xproto x11-libs/libX11 sys-libs/zlib dev-util/gperf sys-devel/bison dev-libs/libxslt media-libs/mesa sys-kernel/linux-headers sys-devel/make sys-devel/binutils sys-devel/gcc"
+_packages="dev-vcs/git app-crypt/gnupg net-misc/curl sys-devel/bc app-arch/lzop app-arch/zip app-arch/unzip dev-libs/libxml2 dev-util/ccache sys-devel/flex x11-proto/xproto x11-libs/libX11 sys-libs/zlib dev-util/gperf sys-devel/bison dev-libs/libxslt media-libs/mesa sys-kernel/linux-headers sys-devel/make sys-devel/binutils sys-devel/gcc"
 KEEP_HEADERS=true
 KEEP_STATIC_LIBS=true
 # include glibc headers and static files from busybox image

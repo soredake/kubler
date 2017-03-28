@@ -1,7 +1,7 @@
 #
 # build config
 #
-PACKAGES="sys-kernel/linux-headers sys-devel/make sys-devel/binutils sys-devel/gcc"
+_packages="sys-kernel/linux-headers sys-devel/make sys-devel/binutils sys-devel/gcc"
 KEEP_HEADERS=true
 KEEP_STATIC_LIBS=true
 # include glibc headers and static files from busybox image

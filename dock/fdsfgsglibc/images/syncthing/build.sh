@@ -1,7 +1,7 @@
 #
 # build config
 #
-PACKAGES="net-p2p/syncthing"
+_packages="net-p2p/syncthing"
 
 #
 # this method runs in the bb builder container just before starting the build of the rootfs

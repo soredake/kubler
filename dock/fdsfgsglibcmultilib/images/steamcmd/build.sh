@@ -1,7 +1,7 @@
 #
 # build config
 #
-PACKAGES="dev-libs/libressl net-misc/steamcmd-bin net-misc/curl app-shells/bash"
+_packages="dev-libs/libressl net-misc/steamcmd-bin net-misc/curl app-shells/bash"
 
 #
 # this method runs in the bb builder container just before starting the build of the rootfs
@@ -33,12 +33,12 @@ configure_rootfs_build()
 finish_rootfs_build()
 {
     # these symlinks are needed for Sven-Coop
-    ln -sfv libssl.so.39.0.1 $EMERGE_ROOT/usr/lib32/libssl.so.1.0.0
-    ln -sfv libcrypto.so.38.0.1 $EMERGE_ROOT/usr/lib32/libcrypto.so.1.0.0
+    ln -sfv libssl.so.39.0.1 ${_EMERGE_ROOT}/usr/lib32/libssl.so.1.0.0
+    ln -sfv libcrypto.so.38.0.1 ${_EMERGE_ROOT}/usr/lib32/libcrypto.so.1.0.0
 
     useradd -s /bin/sh steam
-    mkdir -p $EMERGE_ROOT/home/steam/Steam
-    chown -R steam:steam $EMERGE_ROOT/home/steam
+    mkdir -p ${_EMERGE_ROOT}/home/steam/Steam
+    chown -R steam:steam ${_EMERGE_ROOT}/home/steam
     copy_gcc_libs
     mkdir -p ${EMERGE_ROOT}/lib32
     LIBGCC="$(find /usr/lib/gcc/*/*/32 -name libgcc_s.so.1)"

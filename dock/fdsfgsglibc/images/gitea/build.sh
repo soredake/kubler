@@ -1,7 +1,7 @@
 #
 # build config
 #
-PACKAGES="www-apps/gitea app-shells/bash"
+_packages="www-apps/gitea app-shells/bash"
 
 #
 # this method runs in the bb builder container just before starting the build of the rootfs
