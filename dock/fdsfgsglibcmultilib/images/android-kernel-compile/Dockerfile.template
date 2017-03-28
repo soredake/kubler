@@ -1,6 +1,0 @@
-FROM ${IMAGE_PARENT}
-MAINTAINER ${MAINTAINER}
-
-ADD rootfs.tar /
-
-CMD ["/bin/s6-svscan", "-t0", "/etc/service"]
