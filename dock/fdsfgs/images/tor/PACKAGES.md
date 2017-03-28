@@ -1,7 +1,8 @@
-### fdsfgs/tor:20170226
-Built: Sun Mar 26 17:18:34 UTC 2017
+### fdsfgs/tor:20170326
 
-Image Size: 18.38 MB
+Built: Tue Mar 28 15:01:29 UTC 2017
+Image Size: 18.37 MB
+
 #### Installed
 Package | USE Flags
 --------|----------
@@ -19,7 +20,6 @@ Package | USE Flags
 --------|----------
 **FROM fdsfgs/musl** |
 sys-libs/musl-1.1.15-r2 | ``
-**FROM gentoobb/busybox** |
 **FROM fdsfgs/busybox** |
 sys-apps/busybox-1.25.1 | `ipv6 make-symlinks static -debug -livecd -math -mdev -pam -savedconfig (-selinux) -sep-usr -syslog (-systemd)`
 #### Purged

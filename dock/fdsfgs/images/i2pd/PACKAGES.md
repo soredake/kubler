@@ -1,7 +1,8 @@
-### fdsfgs/i2pd:20170226
-Built: Sun Mar 26 16:54:20 UTC 2017
+### fdsfgs/i2pd:20170326
 
-Image Size: 35.63 MB
+Built: Tue Mar 28 14:48:11 UTC 2017
+Image Size: 35.6 MB
+
 #### Installed
 Package | USE Flags
 --------|----------
@@ -19,7 +20,6 @@ Package | USE Flags
 --------|----------
 **FROM fdsfgs/musl** |
 sys-libs/musl-1.1.15-r2 | ``
-**FROM gentoobb/busybox** |
 **FROM fdsfgs/busybox** |
 sys-apps/busybox-1.25.1 | `ipv6 make-symlinks static -debug -livecd -math -mdev -pam -savedconfig (-selinux) -sep-usr -syslog (-systemd)`
 #### Purged

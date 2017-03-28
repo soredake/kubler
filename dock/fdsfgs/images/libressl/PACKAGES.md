@@ -1,7 +1,8 @@
-### fdsfgs/libressl:20170226
-Built: Sun Mar 26 16:40:07 UTC 2017
+### fdsfgs/libressl:20170326
 
-Image Size: 9.603 MB
+Built: Tue Mar 28 14:42:27 UTC 2017
+Image Size: 9.575 MB
+
 #### Installed
 Package | USE Flags
 --------|----------
@@ -19,7 +20,6 @@ dev-libs/skalibs-2.3.2.0 | `ipv6 -doc -static-libs`
 sys-apps/s6-2.1.3.0 | `-static`
 **FROM fdsfgs/musl** |
 sys-libs/musl-1.1.15-r2 | ``
-**FROM gentoobb/busybox** |
 **FROM fdsfgs/busybox** |
 sys-apps/busybox-1.25.1 | `ipv6 make-symlinks static -debug -livecd -math -mdev -pam -savedconfig (-selinux) -sep-usr -syslog (-systemd)`
 #### Purged

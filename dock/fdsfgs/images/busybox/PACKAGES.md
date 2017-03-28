@@ -1,7 +1,8 @@
-### fdsfgs/busybox:20170226
-Built: Sun Mar 26 16:31:19 UTC 2017
+### fdsfgs/busybox:20170326
 
-Image Size: 1.213 MB
+Built: Tue Mar 28 14:39:47 UTC 2017
+Image Size: 1.186 MB
+
 #### Installed
 Package | USE Flags
 --------|----------

@@ -1,7 +1,8 @@
-### fdsfgs/postgres:20170226
-Built: Sun Mar 26 17:06:32 UTC 2017
+### fdsfgs/postgres:20170326
 
-Image Size: 46.96 MB
+Built: Tue Mar 28 14:51:44 UTC 2017
+Image Size: 45.66 MB
+
 #### Installed
 Package | USE Flags
 --------|----------
@@ -10,7 +11,7 @@ app-misc/editor-wrapper-4 | ``
 dev-db/postgresql-9.5.5 | `libressl nls readline server ssl threads zlib -doc -kerberos -ldap -pam -perl -pg`
 dev-libs/libpcre-8.39 | `cxx readline recursion-limit (unicode) zlib -bzip2 -jit -libedit -pcre16 -pcre32 -static-libs`
 sys-apps/less-487 | `pcre unicode`
-*manual install*: gosu-1.10 | https://github.com/tianon/gosu/
+*manual install*: su-exec-0.2 | https://github.com/ncopa/su-exec/
 #### Inherited
 Package | USE Flags
 --------|----------
@@ -39,7 +40,6 @@ dev-libs/skalibs-2.3.2.0 | `ipv6 -doc -static-libs`
 sys-apps/s6-2.1.3.0 | `-static`
 **FROM fdsfgs/musl** |
 sys-libs/musl-1.1.15-r2 | ``
-**FROM gentoobb/busybox** |
 **FROM fdsfgs/busybox** |
 sys-apps/busybox-1.25.1 | `ipv6 make-symlinks static -debug -livecd -math -mdev -pam -savedconfig (-selinux) -sep-usr -syslog (-systemd)`
 #### Purged
