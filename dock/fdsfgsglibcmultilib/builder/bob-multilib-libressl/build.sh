@@ -37,7 +37,7 @@ configure_bob() {
     update_use 'dev-vcs/git' '-perl'
     update_use 'app-crypt/pinentry' '+ncurses'
     update_use 'net-misc/curl' '+curl_ssl_libressl' '-curl_ssl_openssl'
-    emerge net-misc/curl dev-vcs/git app-portage/layman sys-devel/distcc app-misc/jq
+    emerge net-misc/curl dev-vcs/git sys-devel/distcc app-misc/jq
     install_git_postsync_hooks
     # install aci/oci requirements
     #emerge dev-lang/go
