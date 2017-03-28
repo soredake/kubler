@@ -26,5 +26,5 @@ finish_rootfs_build()
     chown -R rtorrent:rtorrent "${_EMERGE_ROOT}"/downloads
     # make all services executable
     #chmod +x $(find ${_EMERGE_ROOT}/etc/service -name run)
-    ln -s /etc/s6_finish_default $_EMERGE_ROOT/etc/service/rtorrent-tmux/finish
+    #ln -s /etc/s6_finish_default $_EMERGE_ROOT/etc/service/rtorrent-tmux/finish
 }
