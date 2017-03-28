@@ -1,7 +1,7 @@
 #
 # build config
 #
-PACKAGES="net-vpn/i2pd"
+_packages="net-vpn/i2pd"
 
 #
 # this method runs in the bb builder container just before starting the build of the rootfs

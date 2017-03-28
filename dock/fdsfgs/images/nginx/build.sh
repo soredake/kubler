@@ -1,7 +1,7 @@
 #
 # build config
 #
-PACKAGES="www-servers/nginx"
+_packages="www-servers/nginx"
 
 #
 # this method runs in the bb builder container just before starting the build of the rootfs
@@ -22,5 +22,5 @@ configure_rootfs_build()
 #
 finish_rootfs_build()
 {
-    mkdir -p $EMERGE_ROOT/etc/nginx/conf.d
+    mkdir -p "${_EMERGE_ROOT}"/etc/nginx/conf.d
 }

@@ -1,7 +1,7 @@
 #
 # build config
 #
-PACKAGES="net-misc/openssh"
+_packages="net-misc/openssh"
 BOB_INSTALL_BASELAYOUT=true
 
 #
@@ -10,6 +10,7 @@ BOB_INSTALL_BASELAYOUT=true
 configure_rootfs_build()
 {
     # https://stackoverflow.com/questions/2150882/how-to-automatically-add-user-account-and-password-with-a-bash-script
+    # @TODO move this to runtime?
     useradd -l -M -d /torrents -s /bin/sh -p "$(openssl passwd 123)" ssh
     #echo ssh:1234 | chpasswd
 }
@@ -20,5 +21,5 @@ configure_rootfs_build()
 finish_rootfs_build()
 {
     install_suexec
-    cp -f /etc/shadow $EMERGE_ROOT/etc
+    cp -f /etc/shadow $_EMERGE_ROOT/etc
 }

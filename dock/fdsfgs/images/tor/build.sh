@@ -1,7 +1,7 @@
 #
 # build config
 #
-PACKAGES="net-vpn/tor"
+_packages="net-vpn/tor"
 
 #
 # this method runs in the bb builder container just before starting the build of the rootfs

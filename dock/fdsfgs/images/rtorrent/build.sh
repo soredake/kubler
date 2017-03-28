@@ -1,7 +1,7 @@
 #
 # build config
 #
-PACKAGES="net-p2p/rtorrent"
+_packages="net-p2p/rtorrent"
 
 #
 # this method runs in the bb builder container just before starting the build of the rootfs
@@ -17,9 +17,9 @@ configure_rootfs_build()
 finish_rootfs_build()
 {
     useradd -s /bin/sh rtorrent
-    mkdir -p $EMERGE_ROOT/{home/rtorrent,downloads/watch}
-    chown -R rtorrent:rtorrent $EMERGE_ROOT/home/rtorrent $EMERGE_ROOT/downloads
+    mkdir -p $_EMERGE_ROOT/{home/rtorrent,downloads/watch}
+    chown -R rtorrent:rtorrent $_EMERGE_ROOT/home/rtorrent $_EMERGE_ROOT/downloads
     # make all services executable
-    #chmod +x $(find $EMERGE_ROOT/etc/service -name run)
-    #ln -s /etc/s6_finish_default $EMERGE_ROOT/etc/service/rtorrent/finish
+    #chmod +x $(find $_EMERGE_ROOT/etc/service -name run)
+    #ln -s /etc/s6_finish_default $_EMERGE_ROOT/etc/service/rtorrent/finish
 }

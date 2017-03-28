@@ -1,7 +1,7 @@
 #
 # build config
 #
-PACKAGES=""
+_packages=""
 
 #
 # this method runs in the bb builder container just before starting the build of the rootfs

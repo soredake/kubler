@@ -1,7 +1,7 @@
 #
 # build config
 #
-PACKAGES="sys-libs/readline net-misc/curl app-admin/eselect app-portage/portage-utils app-shells/bash"
+_packages="sys-libs/readline net-misc/curl app-admin/eselect app-portage/portage-utils app-shells/bash"
 
 #
 # this method runs in the bb builder container just before starting the build of the rootfs
@@ -9,6 +9,7 @@ PACKAGES="sys-libs/readline net-misc/curl app-admin/eselect app-portage/portage-
 configure_rootfs_build()
 {
     update_use 'sys-libs/ncurses' '+minimal'
+    unprovide_package sys-libs/readline
 }
 
 #
