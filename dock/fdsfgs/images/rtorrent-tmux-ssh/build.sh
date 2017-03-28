@@ -10,6 +10,7 @@ BOB_INSTALL_BASELAYOUT=true
 configure_rootfs_build()
 {
     update_use 'sys-libs/ncurses' '+minimal'
+    useradd -l -m -s /bin/sh rtorrent
 }
 
 #
@@ -19,9 +20,10 @@ finish_rootfs_build()
 {
     #useradd -s /bin/sh rtorrent
     #useradd: PAM: Critical error - immediate abort
-    useradd -R ${_EMERGE_ROOT} -l -m -s /bin/sh rtorrent
-    #mkdir -p $_EMERGE_ROOT/{home/rtorrent,downloads/watch}
-    #chown -R rtorrent:rtorrent $_EMERGE_ROOT/home/rtorrent $_EMERGE_ROOT/downloads
+    #useradd -l -m -s /bin/sh rtorrent
+    mkdir -p "${_EMERGE_ROOT}"/{home/rtorrent,downloads/watch}
+    chown -R rtorrent:rtorrent "${_EMERGE_ROOT}"/home/rtorrent 
+    chown -R rtorrent:rtorrent "${_EMERGE_ROOT}"/downloads
     # make all services executable
     chmod +x $(find ${_EMERGE_ROOT}/etc/service -name run)
     ln -s /etc/s6_finish_default $_EMERGE_ROOT/etc/service/rtorrent-tmux/finish
