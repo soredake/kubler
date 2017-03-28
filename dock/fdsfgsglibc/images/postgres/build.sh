@@ -9,7 +9,6 @@ _packages="app-shells/bash dev-db/postgresql"
 configure_rootfs_build()
 {
     unprovide_package app-shells/bash
-    :
 }
 
 #
@@ -17,7 +16,7 @@ configure_rootfs_build()
 #
 finish_rootfs_build()
 {
-    install_gosu
+    install_suexec
     uninstall_package app-shells/bash
     mkdir /backup
 }
