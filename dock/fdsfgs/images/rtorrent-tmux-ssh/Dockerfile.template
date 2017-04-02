@@ -1,11 +1,11 @@
 FROM ${IMAGE_PARENT}
 MAINTAINER ${MAINTAINER}
 
-ADD files/.rtorrent.rc /home/rtorrent
+ADD files/.rtorrent.rc /home/rtorrent/.rtorrent.rc
 ADD rootfs.tar /
 
-EXPOSE 49168
-EXPOSE 49169
+EXPOSE 21001
+EXPOSE 21001/udp
 VOLUME /downloads
 
 CMD ["/bin/s6-svscan", "-t0", "/service"]

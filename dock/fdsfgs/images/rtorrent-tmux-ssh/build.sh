@@ -18,13 +18,11 @@ configure_rootfs_build()
 #
 finish_rootfs_build()
 {
-    #useradd -s /bin/sh rtorrent
     #useradd: PAM: Critical error - immediate abort
-    #useradd -l -m -s /bin/sh rtorrent
     mkdir -p "${_EMERGE_ROOT}"/{home/rtorrent,downloads/watch}
-    chown -R rtorrent:rtorrent "${_EMERGE_ROOT}"/home/rtorrent 
+    chown -R rtorrent:rtorrent "${_EMERGE_ROOT}"/home/rtorrent
     chown -R rtorrent:rtorrent "${_EMERGE_ROOT}"/downloads
+    chown -R sshd:sshd "${_EMERGE_ROOT}"/etc/ssh
     # make all services executable
-    #chmod +x $(find ${_EMERGE_ROOT}/etc/service -name run)
-    #ln -s /etc/s6_finish_default $_EMERGE_ROOT/etc/service/rtorrent-tmux/finish
+    find "${_EMERGE_ROOT}/etc/service" -name run -exec chmod +x {} \;
 }

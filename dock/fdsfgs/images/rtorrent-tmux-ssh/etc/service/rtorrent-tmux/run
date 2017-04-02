@@ -2,6 +2,8 @@
 
 set -x
 
+if test -e /home/rtorrent/session/rtorrent.lock && test -z $(pidof rtorrent); then rm -f /home/rtorrent/session/rtorrent.lock; fi
+
 # run
 exec 2>&1
-exec /bin/busybox su -l -c "TERM=xterm #@TODO: ssh command that launch tmux with rtorrent /usr/bin/rtorrent" rtorrent #@TODO: /dev/stdout or nothing?
+su-exec rtorrent /usr/bin/tmux new-session -s rt -n rtorrent -d rtorrent
