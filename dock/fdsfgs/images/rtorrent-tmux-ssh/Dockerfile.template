@@ -1,7 +1,7 @@
 FROM ${IMAGE_PARENT}
 MAINTAINER ${MAINTAINER}
 
-ADD files/.rtorrent.rc /home/rtorrent/.rtorrent.rc
+#ADD files/.rtorrent.rc /home/rtorrent/.rtorrent.rc
 ADD rootfs.tar /
 
 EXPOSE 21001

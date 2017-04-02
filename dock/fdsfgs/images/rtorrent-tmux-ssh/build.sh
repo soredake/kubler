@@ -23,6 +23,8 @@ finish_rootfs_build()
     chown -R rtorrent:rtorrent "${_EMERGE_ROOT}"/home/rtorrent
     chown -R rtorrent:rtorrent "${_EMERGE_ROOT}"/downloads
     chown -R sshd:sshd "${_EMERGE_ROOT}"/etc/ssh
+    cp /config/files/.rtorrent.rc /config/files/.bash_profile "${_EMERGE_ROOT}/home/rtorrent"
+    cp /config/etc "${_EMERGE_ROOT}"
     # make all services executable
     find "${_EMERGE_ROOT}/etc/service" -name run -exec chmod +x {} \;
 }
