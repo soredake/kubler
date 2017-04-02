@@ -29,4 +29,6 @@ finish_rootfs_build()
     find "${_EMERGE_ROOT}/etc/service" -name run -exec chmod +x {} \;
     install_suexec
     copy_gcc_libs
+    ln -s "${_EMERGE_ROOT}"/usr/lib/libgcc_s.so.1 ../../lib64/libgcc_s.so.1
+    ln -s "${_EMERGE_ROOT}"/usr/lib/libstdc++.so.6 ../../lib64/libstdc++.so.6
 }

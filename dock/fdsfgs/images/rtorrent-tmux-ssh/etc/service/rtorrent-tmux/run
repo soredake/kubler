@@ -6,11 +6,12 @@ if [ ! -f /stop-rt ]; then
   source /creds.txt
   echo "changing password for rtorrent user"
   echo rtorrent:$pass | busybox chpasswd
-  touch /stop-rtorrent
+  touch /stop-rt
 fi
 
 if test -e /home/rtorrent/session/rtorrent.lock && test -z $(pidof rtorrent); then rm -f /home/rtorrent/session/rtorrent.lock; fi
 
 # run
+#LD_LIBRARY_PATH=/lib64 rtorrent
 exec 2>&1
 su-exec rtorrent /usr/bin/tmux new-session -s rt -n rtorrent -d rtorrent
