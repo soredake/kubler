@@ -5,7 +5,7 @@ set -x
 if [ ! -f /stop-rt ]; then
   source /creds.txt
   echo "changing password for rtorrent user"
-  echo rtorrent:$pass | chpasswd
+  echo rtorrent:$pass | busybox chpasswd
   touch /stop-rtorrent
 fi
 
