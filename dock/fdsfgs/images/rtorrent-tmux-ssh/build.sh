@@ -19,7 +19,7 @@ configure_rootfs_build()
 finish_rootfs_build()
 {
     #useradd: PAM: Critical error - immediate abort
-    mkdir -p "${_EMERGE_ROOT}"/{home/rtorrent,downloads/watch}
+    mkdir -p "${_EMERGE_ROOT}"/{home/rtorrent/session,downloads/watch}
     chown -R rtorrent:rtorrent "${_EMERGE_ROOT}"/home/rtorrent
     chown -R rtorrent:rtorrent "${_EMERGE_ROOT}"/downloads
     chown -R sshd:sshd "${_EMERGE_ROOT}"/etc/ssh
