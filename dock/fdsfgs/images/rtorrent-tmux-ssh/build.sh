@@ -27,4 +27,5 @@ finish_rootfs_build()
     cp -r /config/etc "${_EMERGE_ROOT}"
     # make all services executable
     find "${_EMERGE_ROOT}/etc/service" -name run -exec chmod +x {} \;
+    install_suexec
 }
