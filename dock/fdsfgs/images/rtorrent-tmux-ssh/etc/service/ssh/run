@@ -2,12 +2,12 @@
 
 set -x
 
-if [ ! -f /stop ]; then
-  source /creds.txt
-  echo "changing password for rtorrent user"
-  echo rtorrent:$pass | chpasswd
+if [ ! -f /stop-ssh ]; then
+  chsh -s /bin/sh sshd
+  touch /run/sshd.pid
+  chown sshd:sshd /run/sshd.pid
   busybox su -l -c "/usr/bin/ssh-keygen -A" sshd
-  touch /stop
+  touch /stop-ssh
 fi
 
 # run

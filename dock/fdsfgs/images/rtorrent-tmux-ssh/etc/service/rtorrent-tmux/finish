@@ -1,2 +1,2 @@
 #!/bin/sh
-/usr/bin/tmux send-keys -t rt:rtorrent.0 C-q; while pidof rtorrent > /dev/null; do echo stopping rtorrent...; sleep 1; done
+su-exec rtorrent /usr/bin/tmux send-keys -t rt:rtorrent.0 C-q; while pidof rtorrent > /dev/null; do echo stopping rtorrent...; sleep 1; done

@@ -28,4 +28,5 @@ finish_rootfs_build()
     # make all services executable
     find "${_EMERGE_ROOT}/etc/service" -name run -exec chmod +x {} \;
     install_suexec
+    copy_gcc_libs
 }

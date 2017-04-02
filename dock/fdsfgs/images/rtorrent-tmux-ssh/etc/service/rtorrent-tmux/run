@@ -2,6 +2,13 @@
 
 set -x
 
+if [ ! -f /stop-rt ]; then
+  source /creds.txt
+  echo "changing password for rtorrent user"
+  echo rtorrent:$pass | chpasswd
+  touch /stop-rtorrent
+fi
+
 if test -e /home/rtorrent/session/rtorrent.lock && test -z $(pidof rtorrent); then rm -f /home/rtorrent/session/rtorrent.lock; fi
 
 # run
