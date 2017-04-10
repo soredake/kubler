@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -x
+# wait for start
+sleep 5
+echo "php-fpm: waiting for nginx to start.."
+until pgrep 'nginx' >/dev/null 2>&1; do
+  sleep 1
+done
+
+exec 2>&1
+su-exec www-data /usr/bin/php /var/www/update_daemon2.php

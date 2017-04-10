@@ -1,0 +1,21 @@
+#!/bin/sh
+if [ ! -f /stop-nginx ]; then
+  source /creds.txt
+  echo "adding password to file"
+  printf "$user:$(openssl passwd -apr1 $pass)\n" > /etc/nginx/htpasswd
+  CRT_COUNTRY="${CRT_COUNTRY:-DE}"
+  CRT_STATE="${CRT_STATE:-SA}"
+  CRT_LOCACTION="${CRT_LOCACTION:-MD}"
+  CRT_ORG="${CRT_ORG:-ACME Inc - nginx}"
+  CRT_CN="${CRT_CN:-nginx.local}"
+  # rsa cert
+  openssl req -new -x509 -nodes -days 3650 -newkey rsa:4069 \
+  -subj "/C=${CRT_COUNTRY}/ST=${CRT_STATE}/L=${CRT_LOCACTION}/O=${CRT_ORG}/CN=${CRT_CN}" \
+  -keyout /etc/nginx/ssl/nginx.key \
+  -out /etc/nginx/ssl/nginx.crt
+  # https://github.com/edannenberg/gentoo-bb/blob/master/dock/gentoobb/images/nginx/etc/service/nginx/run#L24-L28
+  openssl dhparam -out /etc/nginx/dh1024.pem 1024
+  ln -s /etc/nginx/ssl_forward_secrecy.conf /etc/nginx/conf.d/
+  touch /stop-nginx
+fi
+exec /usr/sbin/nginx -g "daemon off;"
