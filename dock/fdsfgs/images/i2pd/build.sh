@@ -8,7 +8,7 @@ _packages="net-vpn/i2pd"
 #
 configure_rootfs_build()
 {
-    sync_overlay libressl https://github.com/gentoo/libressl
+    add_overlay libressl https://github.com/gentoo/libressl
     update_keywords 'dev-libs/boost::libressl' '+**'
     update_keywords net-vpn/i2pd +~amd64
     update_use net-vpn/i2pd +cpu_flags_x86_aes +i2p-hardening

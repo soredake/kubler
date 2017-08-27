@@ -44,5 +44,5 @@ configure_bob() {
     #emerge dev-lang/go
     #install_oci_deps
     # add libressl overlay
-    sync_overlay libressl https://github.com/gentoo/libressl.git
+    add_overlay libressl https://github.com/gentoo/libressl.git
 }

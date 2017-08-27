@@ -8,7 +8,7 @@ _packages="dev-libs/libressl net-misc/steamcmd-bin net-misc/curl app-shells/bash
 #
 configure_rootfs_build()
 {
-    sync_overlay eroen https://anongit.gentoo.org/git/user/eroen.git
+    add_overlay eroen https://anongit.gentoo.org/git/user/eroen.git
     update_use dev-libs/libressl +abi_x86_32
     update_use net-misc/curl +abi_x86_32
     update_keywords net-misc/steamcmd-bin +~amd64
@@ -23,7 +23,6 @@ configure_rootfs_build()
     update_use virtual/libffi +abi_x86_32
     update_use dev-util/pkgconfig +abi_x86_32
     provide_package sys-devel/gcc
-    mask_package =dev-libs/libressl-2.5.1
     update_use 'sys-libs/ncurses' '+minimal'
 }
 
@@ -37,8 +36,8 @@ finish_rootfs_build()
     ln -sfv libcrypto.so.38.0.1 ${_EMERGE_ROOT}/usr/lib32/libcrypto.so.1.0.0
 
     useradd -s /bin/sh steam
-    mkdir -p ${_EMERGE_ROOT}/home/steam/Steam
-    chown -R steam:steam ${_EMERGE_ROOT}/home/steam
+    mkdir -p "${_EMERGE_ROOT}/home/steam/Steam"
+    chown -R steam:steam "${_EMERGE_ROOT}/home/steam"
     #copy_gcc_libs
     #mkdir -p ${EMERGE_ROOT}/lib32
     #LIBGCC="$(find /usr/lib/gcc/*/*/32 -name libgcc_s.so.1)"

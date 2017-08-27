@@ -38,6 +38,41 @@ configure_bob() {
     emerge net-misc/curl dev-vcs/git sys-devel/distcc app-misc/jq
     install_git_postsync_hooks
     # add musl and libressl overlay
-    sync_overlay libressl https://github.com/gentoo/libressl.git
-    sync_overlay musl https://github.com/gentoo/musl.git
+    add_overlay libressl https://github.com/gentoo/libressl.git
+    add_overlay musl https://github.com/gentoo/musl.git
+    # install go
+    cd ~
+    wget https://raw.githubusercontent.com/docker-library/golang/7e9aedf483dc0a035747f37af37ed260f2a6cf57/1.8/alpine/no-pic.patch
+    wget https://storage.googleapis.com/golang/go1.4-bootstrap-20161024.tar.gz
+    tar xzvf go1.4-bootstrap-20161024.tar.gz
+    mv go go1.4
+    cd go1.4/src/
+    env CGO_ENABLED=0 ./make.bash
+    export GOPATH=/go
+    cd /usr/lib
+    git clone https://go.googlesource.com/go
+    cd go/src
+    git checkout go1.8.3
+    patch -p2 -i ~/no-pic.patch
+    # some tests seem to be hardlinked against glibc and fail
+    set +e
+    ./all.bash
+    set -e
+    cd ../
+    ln -sr bin/go /usr/bin/
+    ln -sr bin/gofmt /usr/bin/
+    # required by acserver build
+    go install cmd/fix
+    go install cmd/cover
+    go install cmd/vet
+    # taken from alpine build
+    mkdir -p /go/src/golang.org/x/
+    cd /go/src/golang.org/x/
+    git clone https://go.googlesource.com/tools
+    for tool in "cover" "godoc" "stringer"; do
+        go install \
+        golang.org/x/tools/cmd/$tool || return 1
+    done
+    # install aci/oci requirements
+    install_oci_deps
 }
